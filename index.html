@@ -9,10 +9,9 @@
 <body>
   <header class="topbar">
     <h1>Meme Mirror</h1>
-    <span class="privacy" title="Camera frames never leave your computer">100% local</span>
     <div class="spacer"></div>
-    <label class="toggle"><input type="checkbox" id="toggleLandmarks" /> Landmarks</label>
-    <label class="toggle"><input type="checkbox" id="toggleTest" /> Test mode</label>
+    <label class="toggle dev-only"><input type="checkbox" id="toggleLandmarks" /> Landmarks</label>
+    <label class="toggle dev-only"><input type="checkbox" id="toggleTest" /> Test mode</label>
     <button id="btnSetup">Setup wizard</button>
     <button id="btnExport">Export</button>
     <button id="btnImport">Import</button>
@@ -37,14 +36,9 @@
         </div>
       </div>
     </section>
-    <section class="display" id="display">
-      <img id="displayImg" alt="" />
-      <div class="empty" id="displayEmpty">Strike a pose</div>
-      <div class="caption" id="displayCaption"></div>
-    </section>
   </main>
 
-  <section class="panel" id="testPanel" hidden>
+  <section class="panel dev-only" id="testPanel" hidden>
     <h2>Test mode</h2>
     <div class="test-best" id="testBest">–</div>
     <div id="testRows"></div>

@@ -3,7 +3,6 @@ const KEY = 'meme-mirror:v1';
 export const MAX_RECORDED = 5;
 
 export const DISPLAY_MODES = {
-  panel: 'Side panel',
   'overlay-above-head': 'Above head',
   'overlay-on-face': 'On face',
   fullscreen: 'Fullscreen',
@@ -42,7 +41,7 @@ export class Store extends EventTarget {
     try {
       const data = JSON.parse(localStorage.getItem(KEY) || 'null');
       if (data) {
-        this.memes = data.memes || [];
+        this.memes = (data.memes || []).map((m) => (m.mode === 'panel' ? { ...m, mode: 'overlay-above-head' } : m));
         this.deletedIds = data.deletedIds || [];
       }
     } catch (e) {

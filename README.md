@@ -1,6 +1,6 @@
 # Meme Mirror
 
-Strike a pose in front of your webcam and the matching meme appears: on the side, above your head, over your face, or fullscreen.
+Strike a pose in front of your webcam and the matching meme appears: above your head, over your face, or fullscreen.
 
 **Everything runs locally.** Camera frames are never uploaded anywhere. There are no accounts, no cloud AI and no paid APIs. Recognition is MediaPipe landmarks plus a nearest-neighbour matcher, all in your browser.
 
@@ -31,11 +31,11 @@ Auto poses from images are matched with looser limits and with body pose weighte
 
 ## Display modes
 
-Per meme: **Above head** (default), **On face**, **Fullscreen**, **Side panel**. The **Advanced** section has X/Y offset, scale and opacity sliders. Overlays follow your head with smoothing and match head roll, fading in and out in ~150 ms. Memes stay up for 1.5 s after you drop the pose.
+Per meme: **Above head** (default), **On face**, **Fullscreen**. The **Advanced** section has X/Y offset, scale and opacity sliders. Overlays follow your head with smoothing and match head roll, fading in and out in ~150 ms. Memes stay up for 1.5 s after you drop the pose.
 
 ## Tuning
 
-- **Test mode** (top bar) shows the distance to every meme live, with each threshold marked. Lower the threshold if a meme fires accidentally; raise it if it does not fire.
+- **Test mode** and the **Landmarks** overlay (only visible in `npm run dev`, never on the published site) shows the distance to every meme live, with each threshold marked. Lower the threshold if a meme fires accidentally; raise it if it does not fire.
 - A meme triggers only when it is under its threshold, wins for 300 ms in a row, and beats the runner-up by a margin.
 - After setup, memes whose poses match each other get a warning. Re-record one with a more distinct pose.
 - If FPS falls below 20 the face and pose models automatically run every 2nd to 4th frame.

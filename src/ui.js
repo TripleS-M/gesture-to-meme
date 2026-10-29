@@ -58,8 +58,12 @@ export class UI {
   // --- static wiring ----------------------------------------------------------------
   bind() {
     const app = this.app;
-    $('toggleLandmarks').onchange = (e) => { app.showLandmarks = e.target.checked; };
-    $('toggleTest').onchange = (e) => { $('testPanel').hidden = !e.target.checked; };
+    // Debug tools (landmarks, test mode) exist only in `npm run dev`, never in the published site.
+    if (!import.meta.env.DEV) document.querySelectorAll('.dev-only').forEach((el) => el.remove());
+    else {
+      $('toggleLandmarks').onchange = (e) => { app.showLandmarks = e.target.checked; };
+      $('toggleTest').onchange = (e) => { $('testPanel').hidden = !e.target.checked; };
+    }
     $('btnSetup').onclick = () => this.openWizard();
     $('btnExport').onclick = () => this.exportData();
     $('btnImport').onclick = () => $('importFile').click();
@@ -256,18 +260,9 @@ export class UI {
     }
     $('fpsChip').textContent = app.fps ? `${Math.round(app.fps)} fps` : '';
 
-    // display panel
-    const active = this.store.get(state.activeId);
-    const img = $('displayImg');
-    const panelMeme = active && active.mode === 'panel' ? active : null;
-    if (panelMeme) { if (img.getAttribute('src') !== panelMeme.image) img.src = panelMeme.image; }
-    img.classList.toggle('show', !!panelMeme);
-    $('displayEmpty').classList.toggle('hide', !!active);
-    $('displayEmpty').textContent = 'Strike a pose';
-    $('displayCaption').textContent = active ? (panelMeme ? active.name : `${active.name} (shown on camera)`) : '';
     for (const [id, c] of this.cards) c.el.classList.toggle('active', id === state.activeId);
 
-    if (!$('testPanel').hidden) this.renderTest(state, live);
+    if ($('testPanel') && !$('testPanel').hidden) this.renderTest(state, live);
     if (this.wizard) this.frameWizard(live);
   }
 
