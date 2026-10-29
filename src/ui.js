@@ -218,12 +218,26 @@ export class UI {
   renderConflicts() {
     const box = $('conflicts');
     box.replaceChildren();
-    for (const c of findConflicts(this.store.memes)) {
+    const conflicts = findConflicts(this.store.memes);
+    if (!conflicts.length) return;
+    let open = true;
+    try { open = localStorage.getItem('meme-mirror:warnings-open') !== '0'; } catch { /* ignore */ }
+    const details = document.createElement('details');
+    details.className = 'warnings';
+    details.open = open;
+    const summary = document.createElement('summary');
+    summary.textContent = `Warnings (${conflicts.length})`;
+    details.append(summary);
+    details.ontoggle = () => {
+      try { localStorage.setItem('meme-mirror:warnings-open', details.open ? '1' : '0'); } catch { /* ignore */ }
+    };
+    for (const c of conflicts) {
       const d = document.createElement('div');
       d.className = 'conflict';
       d.textContent = `“${c.a.name}” and “${c.b.name}” look too similar and may trigger each other. Re-record one of them with a more distinct pose.`;
-      box.append(d);
+      details.append(d);
     }
+    box.append(details);
   }
 
   // --- per-frame updates -------------------------------------------------------------
