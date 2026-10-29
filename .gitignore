@@ -1,0 +1,6 @@
+node_modules
+dist
+public/models
+public/wasm
+public/memes-manifest.json
+*.part

@@ -1,0 +1,6 @@
+[
+  { "id": "thumbs-up", "name": "Thumbs up", "image": "memes/thumbs-up.svg" },
+  { "id": "peace-sign", "name": "Peace sign", "image": "memes/peace-sign.svg" },
+  { "id": "thinking", "name": "Thinking", "image": "memes/thinking.svg" },
+  { "id": "shush", "name": "Shush", "image": "memes/shush.svg" }
+]

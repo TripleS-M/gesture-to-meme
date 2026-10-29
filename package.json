@@ -1,0 +1,22 @@
+{
+  "name": "meme-mirror",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "setup": "node scripts/setup.js",
+    "scan": "node scripts/scan.js",
+    "predev": "node scripts/setup.js && node scripts/scan.js",
+    "dev": "vite",
+    "build": "node scripts/setup.js && node scripts/scan.js && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.14"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "vitest": "^2.1.0"
+  }
+}

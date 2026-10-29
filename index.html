@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meme Mirror</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪞</text></svg>" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Meme Mirror</h1>
+    <span class="privacy" title="Camera frames never leave your computer">100% local</span>
+    <div class="spacer"></div>
+    <label class="toggle"><input type="checkbox" id="toggleLandmarks" /> Landmarks</label>
+    <label class="toggle"><input type="checkbox" id="toggleTest" /> Test mode</label>
+    <button id="btnSetup">Setup wizard</button>
+    <button id="btnExport">Export</button>
+    <button id="btnImport">Import</button>
+    <input type="file" id="importFile" accept="application/json,.json" hidden />
+  </header>
+
+  <main class="layout">
+    <section class="stage-col">
+      <div class="stage" id="stage">
+        <video id="video" playsinline muted></video>
+        <canvas id="overlay"></canvas>
+        <div class="chip" id="statusChip">Starting…</div>
+        <div class="chip fps" id="fpsChip"></div>
+        <div class="record-overlay" id="recordOverlay" hidden>
+          <div class="record-title" id="recordTitle"></div>
+          <div class="record-count" id="recordCount"></div>
+          <div class="progress"><div id="recordBar"></div></div>
+        </div>
+        <div class="camera-error" id="cameraError" hidden>
+          <p id="cameraErrorText"></p>
+          <button id="btnRetryCamera" class="primary">Retry camera</button>
+        </div>
+      </div>
+    </section>
+    <section class="display" id="display">
+      <img id="displayImg" alt="" />
+      <div class="empty" id="displayEmpty">Strike a pose</div>
+      <div class="caption" id="displayCaption"></div>
+    </section>
+  </main>
+
+  <section class="panel" id="testPanel" hidden>
+    <h2>Test mode</h2>
+    <div class="test-best" id="testBest">–</div>
+    <div id="testRows"></div>
+  </section>
+
+  <section class="panel library">
+    <div class="library-head">
+      <h2>Memes</h2>
+      <div class="spacer"></div>
+      <button id="btnAddMemes" class="primary">Add memes</button>
+      <input type="file" id="memeFiles" accept="image/*" multiple hidden />
+    </div>
+    <div class="dropzone" id="dropzone">Drop meme images here, or click “Add memes”. Each one is analysed automatically.</div>
+    <div class="progress import-progress" id="importProgress" hidden><div id="importBar"></div><span id="importText"></span></div>
+    <div id="conflicts"></div>
+    <div class="meme-list" id="memeList"></div>
+  </section>
+
+  <div class="modal" id="wizard" hidden>
+    <div class="wizard-card">
+      <div class="wizard-head">
+        <strong id="wizardStep"></strong>
+        <div class="spacer"></div>
+        <button id="wizardClose" title="Close (Esc)">Close</button>
+      </div>
+      <div class="wizard-body">
+        <div class="wizard-pane">
+          <div class="pane-label">Meme</div>
+          <div class="wizard-meme"><img id="wizardImg" alt="" /></div>
+          <div class="wizard-meta">
+            <label>Show it
+              <select id="wizardMode"></select>
+            </label>
+            <details>
+              <summary>Advanced</summary>
+              <div id="wizardAdvanced"></div>
+            </details>
+          </div>
+        </div>
+        <div class="wizard-pane">
+          <div class="pane-label">You</div>
+          <div class="wizard-cam">
+            <canvas id="wizardCam"></canvas>
+            <div class="record-overlay" id="wizardRecord" hidden>
+              <div class="record-count" id="wizardCount"></div>
+              <div class="progress"><div id="wizardBar"></div></div>
+            </div>
+          </div>
+          <div class="match-meter" id="wizardMeter">
+            <div class="meter-fill" id="wizardMeterFill"></div>
+            <div class="meter-mark" id="wizardMeterMark"></div>
+          </div>
+          <div class="match-label" id="wizardMatch"></div>
+        </div>
+      </div>
+      <p class="wizard-status" id="wizardStatus"></p>
+      <div class="wizard-actions">
+        <button id="wizWorks" class="primary">Works, next <kbd>Enter</kbd></button>
+        <button id="wizRecord">Record my pose <kbd>Space</kbd></button>
+        <button id="wizSkip">Skip for now <kbd>S</kbd></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
