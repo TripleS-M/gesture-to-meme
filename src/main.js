@@ -1,3 +1,9 @@
+import '@fontsource/instrument-sans/400.css';
+import '@fontsource/instrument-sans/500.css';
+import '@fontsource/instrument-sans/600.css';
+import '@fontsource/syne/700.css';
+import '@fontsource/syne/800.css';
+import '@fontsource/fragment-mono/400.css';
 import './styles.css';
 import seed from '../memes.json';
 import { startCamera, describeCameraError } from './camera.js';

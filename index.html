@@ -8,7 +8,7 @@
 </head>
 <body>
   <header class="topbar">
-    <h1>Meme Mirror</h1>
+    <h1 class="logo"><i></i>Meme Mirror</h1>
     <div class="spacer"></div>
     <label class="toggle dev-only"><input type="checkbox" id="toggleLandmarks" /> Landmarks</label>
     <label class="toggle dev-only"><input type="checkbox" id="toggleTest" /> Test mode</label>
@@ -35,27 +35,34 @@
           <button id="btnRetryCamera" class="primary">Retry camera</button>
         </div>
       </div>
+      <div class="meter" id="bestStrip">
+        <span class="meter-label">Best match</span>
+        <div class="bar"><b id="bestBar"></b></div>
+        <span class="meter-text" id="bestText">–</span>
+      </div>
     </section>
+    <div class="side-col">
+    <section class="panel dev-only" id="testPanel" hidden>
+      <h2>Test mode</h2>
+      <div class="test-best" id="testBest">–</div>
+      <div id="testRows"></div>
+    </section>
+
+    <section class="panel library">
+      <div class="library-head">
+        <h2>Memes<small id="memeCount"></small></h2>
+        <div class="spacer"></div>
+        <button id="btnAddMemes" class="primary">Add memes</button>
+        <input type="file" id="memeFiles" accept="image/*" multiple hidden />
+      </div>
+      <div class="dropzone" id="dropzone">Drop meme images here, or click “Add memes”. Each one is analysed automatically.</div>
+      <div class="progress import-progress" id="importProgress" hidden><div id="importBar"></div><span id="importText"></span></div>
+      <div id="conflicts"></div>
+      <div class="meme-list" id="memeList"></div>
+    </section>
+    </div>
   </main>
 
-  <section class="panel dev-only" id="testPanel" hidden>
-    <h2>Test mode</h2>
-    <div class="test-best" id="testBest">–</div>
-    <div id="testRows"></div>
-  </section>
-
-  <section class="panel library">
-    <div class="library-head">
-      <h2>Memes</h2>
-      <div class="spacer"></div>
-      <button id="btnAddMemes" class="primary">Add memes</button>
-      <input type="file" id="memeFiles" accept="image/*" multiple hidden />
-    </div>
-    <div class="dropzone" id="dropzone">Drop meme images here, or click “Add memes”. Each one is analysed automatically.</div>
-    <div class="progress import-progress" id="importProgress" hidden><div id="importBar"></div><span id="importText"></span></div>
-    <div id="conflicts"></div>
-    <div class="meme-list" id="memeList"></div>
-  </section>
 
   <div class="modal" id="wizard" hidden>
     <div class="wizard-card">

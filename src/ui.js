@@ -154,6 +154,7 @@ export class UI {
       this.cards.set(m.id, card);
       list.append(card.el);
     }
+    $('memeCount').textContent = `${this.store.memes.length} loaded`;
     this.renderConflicts();
   }
 
@@ -258,12 +259,28 @@ export class UI {
       chip.textContent = parts.join(' · ') || 'Person detected';
       chip.className = 'chip ok';
     }
-    $('fpsChip').textContent = app.fps ? `${Math.round(app.fps)} fps` : '';
+    $('fpsChip').textContent = app.fps ? `LIVE · ${Math.round(app.fps)} FPS` : '';
+    this.renderBest(state, live);
 
     for (const [id, c] of this.cards) c.el.classList.toggle('active', id === state.activeId);
 
     if ($('testPanel') && !$('testPanel').hidden) this.renderTest(state, live);
     if (this.wizard) this.frameWizard(live);
+  }
+
+  /** "Best match" strip under the camera: nearest meme and how close it is. */
+  renderBest(state, live) {
+    const best = state.best;
+    const bar = $('bestBar');
+    if (!live || !best) {
+      $('bestText').textContent = live ? 'no memes yet' : '–';
+      bar.style.width = '0';
+      bar.classList.remove('ok');
+      return;
+    }
+    $('bestText').textContent = `${best.meme.name} · ${best.distance.toFixed(2)}`;
+    bar.style.width = `${Math.max(2, (1 - Math.min(best.distance, 2) / 2) * 100)}%`;
+    bar.classList.toggle('ok', state.valid);
   }
 
   renderTest(state, live) {

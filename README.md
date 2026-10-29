@@ -29,13 +29,18 @@ Badges: **auto** = pose read from the image, **recorded** = from your camera, **
 
 Auto poses from images are matched with looser limits and with body pose weighted low, since the person in a meme has different proportions and camera angle from you. If one matches poorly, **Re-record**. Use **+ Sample** to add more recordings (up to 5) for robustness.
 
+## Look and feel
+
+A two-column "viewfinder / darkroom" layout: the camera (sticky) with a live status chip, FPS chip and Best match strip on the left, and the meme library on the right. It stacks into one column below 980px. Styling is plain CSS in `src/styles.css` (design tokens on `:root`), and the fonts (Instrument Sans, Syne, Fragment Mono) are bundled via `@fontsource`, so nothing is loaded from a CDN and the app still works offline.
+
 ## Display modes
 
 Per meme: **Above head** (default), **On face**, **Fullscreen**. The **Advanced** section has X/Y offset, scale and opacity sliders. Overlays follow your head with smoothing and match head roll, fading in and out in ~150 ms. Memes stay up for 1.5 s after you drop the pose.
 
 ## Tuning
 
-- **Test mode** and the **Landmarks** overlay (only visible in `npm run dev`, never on the published site) shows the distance to every meme live, with each threshold marked. Lower the threshold if a meme fires accidentally; raise it if it does not fire.
+- The **Best match** strip under the camera shows the closest meme and its distance live (the bar turns lime when it would trigger).
+- **Test mode** and the **Landmarks** overlay are developer tools: they only appear with `npm run dev` and never on the published site. Test mode lists the distance to every meme with each threshold marked. Lower a threshold if a meme fires accidentally; raise it if it does not fire.
 - A meme triggers only when it is under its threshold, wins for 300 ms in a row, and beats the runner-up by a margin.
 - After setup, memes whose poses match each other get a warning. Re-record one with a more distinct pose.
 - If FPS falls below 20 the face and pose models automatically run every 2nd to 4th frame.
